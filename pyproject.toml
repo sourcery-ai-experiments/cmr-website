@@ -1,0 +1,222 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CMR"
+description = "Django-based website for Carolina Model Railroaders (CMR) and Greensboro Chapter of the National Railroad Historical Sociaty (NRHS)."
+authors = [
+    {name = "Martin Lanser", email = "martinlanser@gmail.com"}
+]
+maintainers = [
+    {name = "Martin Lanser", email = "martinlanser@gmail.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 3 - Alpha",
+
+  # Indicate who your project is intended for
+  "Intended Audience :: Developers",
+  "Topic :: Django :: Website :: Model Railroad",
+
+  # Pick your license as you wish (see also "license" above)
+  "License :: OSI Approved :: MIT License",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+]
+keywords = ["CMR", "NRHS", "railroad", "model railroad"]
+dependencies = [
+    "asgiref >=3.8",
+    "certifi >= 2024.6",
+    "cffi >= 1.16",
+    "cfgv >= 3.4",
+    "chardet >= 5.2",
+    "charset-normalizer >= 3.3",
+    "cryptography >= 42.0",
+    "cssselect2 >= 0.7",
+    "python-dateutil >= 2.9",
+    "defusedxml >= 0.7",
+    "distlib >= 0.3",
+    "django >= 5.0",
+    "django-allauth >= 0.63",
+    "django-appconf >= 1.0",
+    "django-classy-tags >= 4.1",
+    "django-cms >= 4.1",
+    "django-debug-toolbar >= 4.4",
+    "django-environ >= 0.11",
+    "django-extensions >= 3.2",
+    "django-filer >= 3.1",
+    "django-formtools >= 2.5",
+    "django-fsm >= 2.8",
+    "django-imagekit >= 5.0",
+    "django-linear-migrations >= 2.13",
+    "django-parler >= 2.3",
+    "django-polymorphic >= 3.1",
+    "django-sekizai >= 4.1",
+    "django-treebeard >= 4.7",
+    "djangocms-admin-style >= 3.3",
+    "djangocms-alias >= 2.0",
+    "djangocms-attributes-field >= 3.0",
+    "djangocms-file >= 3.0",
+    "djangocms-googlemap >= 2.2",
+    "djangocms-picture >= 4.1",
+    "djangocms-snippet >= 3.1",
+    "djangocms-style >= 3.1",
+    "djangocms-text-ckeditor >= 5.1",
+    "djangocms-versioning >= 2.0",
+    "djangocms-video >= 3.1",
+    "easy-thumbnails >= 2.8",
+    "filelock >= 3.15",
+    "html5lib >= 1.1",
+    "identify >= 2.5",
+    "idna >= 3.7",
+    "lxml >= 5.2",
+    "nodeenv >= 1.9",
+    "oauthlib >= 3.2",
+    "pilkit >= 3.0",
+    "pillow >= 10.3",
+    "platformdirs >= 4.2",
+    "psycopg2-binary >= 2.9",
+    "pycparser >= 2.22",
+    "pyjwt >= 2.8",
+    "pypng >= 0.20220715",
+    "pyproject-hooks >= 1.1",
+    "python-dotenv >= 1.0",
+    "python3-openid >= 3.2",
+    "pyyaml >= 6.0",
+    "qrcode >= 7.4",
+    "reportlab >= 4.2",
+    "requests >= 2.32",
+    "requests-oauthlib >= 2.0",
+    "six >= 1.16",
+    "sqlparse >= 0.5",
+    "svglib >= 1.5",
+    "tinycss2 >= 1.3",
+    "typing-extensions >= 4.12",
+    "urllib3 >= 2.2",
+    "webencodings >= 0.5",
+]
+requires-python = ">=3.12"
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "build >= 1.2",
+    "bumpver",
+    "constable >= 0.3",
+    "factory-boy >= 3.3",
+    "faker >= 25.9",
+    "isort",
+    "packaging >= 24.1",
+    "pre-commit >= 3.7",
+    "pytest",
+    "pytest-mock",
+    "pytest-random",
+    "setuptools >= 70.1",
+    "virtualenv >= 20.26",
+]
+
+[project.urls]
+Homepage = "https://cmr.f451labs.com"
+Repository = "https://github.com/mlanser/cmr-website.git"
+
+[project.scripts]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"]}
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+addopts = [
+    "--import-mode=importlib",
+]
+
+[tool.bumpver]
+current_version = "2024.0.0"
+version_pattern = "YYYY.MM.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+tag_message = "{new_version}"
+tag_scope = "default"
+pre_commit_hook = ""
+post_commit_hook = ""
+commit = true
+tag = true
+push = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"']
+"README.md" = ['v{version}$']
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black.
+line-length = 99
+indent-width = 4
+
+# Assume Python 3.12+ by default.
+target-version = "py312"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default. Also enable flake8-bugbear (`B`) rules.
+# But avoid enforcing line-length violations (`E501`)
+select = ["E4", "E7", "E9", "F", "B"]
+ignore = ["E501"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided. But avoid trying
+# to fix flake8-bugbear (`B`) violations.
+fixable = ["ALL"]
+unfixable = ["B"]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Ignore `E402` (import violations) in all `__init__.py` files,
+# and in select subdirectories.
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "single"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
