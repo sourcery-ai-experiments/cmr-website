@@ -8,18 +8,34 @@
     Adapted to Django by Martin Lanser
     Customized for CMR project
 -->
-<html>
-{% load static %}
-{% load cms_tags sekizai_tags %}
+{% load i18n static wagtailcore_tags wagtailimages_tags wagtailuserbar %}
+<html lang="en">
 <head>
-    <title>{% block title %}CMR & NRHS{% endblock %}</title>
+    <title>
+        {% block title %}
+            {% if page.title_seo %}
+                {{ page.title_seo }}
+            {% else %}
+                {{ page.title }}
+            {% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            | {{ settings.title_suffix }}
+        {% endblock %}
+    </title>
     <meta charset="utf-8" />
+    <meta name="description" content="{% block search_description %}{% if page.search_description %}{{ page.search_description }}{% endif %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+        <base target="_blank">
+    {% endif %}
+
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-    {% render_block "css" %}
 </head>
 <body class="homepage is-preload">
-    {% cms_toolbar %}
+    {% wagtailuserbar %}
     <div id="page-wrapper">
 
         <!-- Header -->
@@ -28,7 +44,9 @@
 
                 <!-- Logo -->
                 <h1 id="logo"><a href="/">{% block header %}CMR & NRHS{% endblock %}</a></h1>
-                <p>{% block header2 %}Home of the <strong>Carolina Model Railroaders</strong> and the <strong>Greensboro Chapter of National Railroad Historical Society</strong>{% endblock %}</p>
+                <p>{% block header2 %}Home of the <strong>Carolina Model Railroaders</strong><br />
+                and the <strong>Greensboro Chapter</strong> of the<br />
+                <strong>National Railroad Historical Society</strong>{% endblock %}</p>
 
                 <!-- Nav -->
                 {% block header_nav %}
@@ -81,6 +99,5 @@
     <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
     <script src="{% static 'assets/js/util.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
-    {% render_block "js" %}
 </body>
 </html>
