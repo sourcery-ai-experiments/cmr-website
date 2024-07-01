@@ -113,6 +113,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django_extensions',
     'django_filters',
     'imagekit',
@@ -127,9 +128,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.openid',
     # -- 'wagtail' apps ------------
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.contrib.routable_page',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -138,9 +136,21 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
+    'wagtail.api.v2',
+    'wagtail.locales',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.contrib.routable_page',
+    'wagtail.contrib.table_block',
+    'wagtail.contrib.typed_table_block',
+    'wagtail.contrib.search_promotions',
+    'wagtail.contrib.settings',
+    'wagtail.contrib.simple_translation',
+    'wagtail.contrib.styleguide',
     'wagtail',
     'taggit',
     'modelcluster',
+    # 'wagtailfontawesomesvg',
     # ---------------------------------
     # 'blog',
     # 'events',
@@ -240,14 +250,11 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    # BASE_DIR / 'static',
+    BASE_DIR / 'static',
     BASE_DIR / 'media',
 ]
 
-STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 WAGTAILADMIN_BASE_URL = '/admin/'
@@ -261,14 +268,14 @@ DEFAULT_LIST_LEN = 10
 # 'allauth' Provider specific settings
 # https://docs.allauth.org/en/latest/introduction/index.html
 SOCIALACCOUNT_PROVIDERS = {
+    # For each OAuth based provider, either add a ``SocialApp``
+    # (``socialaccount`` app) containing the required client
+    # credentials, or list them here:
     'github': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': env('GITHUB_SOCIAL_AUTH_CLIENT_ID'),
-            'secret': env('GITHUB_SOCIAL_AUTH_CLIENT_SECRET'),
-        }
+        'SCOPE': [
+            'read:user',
+            'user:email',
+        ],
     },
     'google': {
         'APP': {

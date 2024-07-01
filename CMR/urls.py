@@ -47,7 +47,8 @@ urlpatterns = [
     # path('news/', home_views.news, name='news'),
     # path('layouts/', include('cmr_layouts.urls')),
     # path('members/', include('accounts.urls')),
-    # path('accounts/', include('allauth.urls')),  # Required by `allauth`
+    path('accounts/', include('allauth.urls')),  # Required by `allauth`
+    path('home/', home_views.home, name='home'),
 ]
 
 # Following is for local DEV in DEBUG mode only!
